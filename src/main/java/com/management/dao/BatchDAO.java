@@ -12,13 +12,17 @@ import com.management.model.Subject;
  *
  */
 public class BatchDAO {
-	public static int getBatchId(Connection connection) {
+	public static int getBatchId() {
+		System.out.println("* * * getBactchId method from BatchDAO");
 		int batchID = 0;
 		try{
-			PreparedStatement ps=connection.prepareStatement("SELECT MAX( id ) AS last_id FROM batch1");
+			Connection connection = DBConnection.createConnection();
+			PreparedStatement ps=connection.prepareStatement("SELECT MAX(batch_id) AS last_id FROM batch1");
 			ResultSet rs=ps.executeQuery();
+			System.out.println("batch ID query executed");
 			if(rs.next()){
 				batchID = rs.getInt("last_id");
+				System.out.println("Batch Id previous = " + batchID);
 				batchID++;
 			}
 		}catch(Exception e){System.out.println(e);}
@@ -45,30 +49,37 @@ public class BatchDAO {
 		return i;
 	}
 	
-	public int createBatch(Batch batch) throws ClassNotFoundException, SQLException{
+	public static int createBatch(Batch batch) throws ClassNotFoundException, SQLException{
+		System.out.println("* * * *BatchDAO.createBatch method started");
 		String insert_batch = "INSERT INTO batch1" + 
-	    " (batch_id,subject_1,subject_2,subject_3,subject_4,subject_5,subject_6,subject_7,subject_8)"+
+	    " (batch_id,subject_id1,subject_id2,subject_id3,subject_id4,subject_id5,subject_id6,subject_id7,subject_id8)"+
         " VALUES (?,?,?,?,?,?,?,?,?)";
 		
 		int result = 0;
 		Connection connection = DBConnection.createConnection();
 		PreparedStatement ps = connection.prepareStatement(insert_batch);
 		final int[] sid = batch.getSubjectIDs();
-		ps.setInt(1,getBatchId(connection));
-		for(int i=0;i<8;i++) {
-			int j = 2;
-			if(sid[i] != -1) {
-				ps.setInt(j, i);
-			}else {
-				ps.setInt(j,0);
-			}
-			j++;
+		/*
+		System.out.println(batch.getBatchID());
+		for(int i=0;i<sid.length;i++) {
+			System.out.println(sid[i]);
 		}
+		*/
+		ps.setInt(1,batch.getBatchID());
+		ps.setInt(2,sid[0]);
+		ps.setInt(3,sid[1]);
+		ps.setInt(4,sid[2]);
+		ps.setInt(5,sid[3]);
+		ps.setInt(6,sid[4]);
+		ps.setInt(7,sid[5]);
+		ps.setInt(8,sid[6]);
+		ps.setInt(9,sid[7]);
 		
 		System.out.println("preparedStatement");
 		//executing query
 		result = ps.executeUpdate();
 		connection.close();
+		System.out.println("* * * *BatchDAO.createBatch method ended");
 		return result;
 	}
 	

@@ -1,5 +1,7 @@
 package com.management.model;
 
+import com.management.dao.BatchDAO;
+
 public class Batch {
 	
 	private int batchID;
@@ -12,6 +14,10 @@ public class Batch {
 			subjectID[i] = -1;
 		}
 	}
+	public int setBatchID() {
+		this.batchID = BatchDAO.getBatchId();
+		return this.batchID;
+	}
 	
 	public void createBatchID(int i) {
 		this.batchID = i;
@@ -19,6 +25,11 @@ public class Batch {
 	
 	public int getBatchID() {
 		return batchID;
+	}
+	
+	public void addSubjects(int[] subID) {
+		for(int i=0;i<8;i++)
+			subjectID[i] = subID[i];
 	}
 
 	public void setSubject(Subject subject) {

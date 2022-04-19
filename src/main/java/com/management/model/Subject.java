@@ -4,6 +4,13 @@ public class Subject {
 	private int subjectID;
 	private String name;
 	private String teacherName;
+	
+	public Subject(int subjectID,String name,String teacherName) {
+		this.subjectID = subjectID;
+		this.name = name;
+		this.teacherName = teacherName;
+	}
+	
 	/**
 	 * @return the teacherName
 	 */
@@ -47,9 +54,7 @@ public class Subject {
 		this.batchID = batchID;
 	}
 	
-	public Subject(String name) {
-		this.name = name;
-	}
+	
 
 	/**
 	 * @return the name

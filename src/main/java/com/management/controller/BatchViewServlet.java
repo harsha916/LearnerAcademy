@@ -77,9 +77,20 @@ public class BatchViewServlet extends HttpServlet {
 					else
 					    out.println("<td>" + subName + "</td>");
 				}
-				out.println("<td> <a href=''>DELETE</a> </td>");
-				out.println("<td> <a href=''>VIEW</a> </td>");
-				out.println("<td> <a href=''>EDIT</a> </td>");
+				
+				out.println("<td><form action= '" + request.getContextPath() + "/DeleteBatchServlet'>");
+				out.println("<input type='hidden' value=''");
+				out.println("<input type='submit' value='DELETE BATCH'");
+				out.println("</form></td>");
+				
+				out.println("<td><form action= '" + request.getContextPath() + "/ViewBatchServlet'>");
+				out.println("<input type='submit' value='VIEW BATCH'");
+				out.println("</form></td>");
+				
+				out.println("<td><form action= '" + request.getContextPath() + "/EditBatchServlet'>");
+				out.println("<input type='submit' value='EDIT BATCH'");
+				out.println("</form></td>");
+				
 				out.println("</tr>");
 			}
 		} catch (ClassNotFoundException e) {
@@ -90,11 +101,9 @@ public class BatchViewServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		
 		out.println("</table>");
 		out.println("<br>");
-		out.println("<form align='center' action=''>");
+		out.println("<form action= '/addClass.jsp' align='center'>");
 		out.println("<input type='submit' value='ADD BATCH'");
 		out.println("</form>");
 		out.println("</body>");

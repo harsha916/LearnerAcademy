@@ -11,9 +11,10 @@ import com.management.model.Subject;
  *
  */
 public class SubjectDAO {
-	public static int getSubjectId(Connection connection) {
+	public static int getSubjectId() {
 		int id=0;
 		try{
+			Connection connection = DBConnection.createConnection();
 			PreparedStatement ps=connection.prepareStatement("SELECT MAX( id ) AS last_id FROM subject");
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()){
@@ -29,7 +30,7 @@ public class SubjectDAO {
 		int result = 0;
 		Connection connection = DBConnection.createConnection();
 		PreparedStatement ps = connection.prepareStatement(insert_emp_query);
-		ps.setInt(1,getSubjectId(connection));
+		ps.setInt(1,getSubjectId());
 		ps.setString(2, sub.getName());
 		ps.setString(3, sub.getTeacherName());
 	
@@ -48,5 +49,25 @@ public class SubjectDAO {
 		//executing query
 		result = ps.executeUpdate();
 		return result;
+	}
+	public static Subject getSubject(int subject_id) {
+		int id=0;
+		String subject_name = "";
+		String teacher_name = "";
+		try{
+			Connection connection = DBConnection.createConnection();
+			PreparedStatement ps=connection.prepareStatement("SELECT * FROM subject WHERE subject_id = " + subject_id);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				id = 1;
+				subject_name = rs.getString(2);
+				teacher_name = rs.getString(3);
+			}
+		}catch(Exception e){System.out.println(e);}
+		Subject sub = null;
+		if(id == 1) {
+			sub = new Subject(subject_id,subject_name,teacher_name);
+		}
+		return sub;
 	}
 }

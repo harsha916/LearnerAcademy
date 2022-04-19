@@ -15,9 +15,9 @@ public class DBConnection {
 			Class.forName("com.mysql.jdbc.Driver");
 			con=DriverManager.getConnection(url,username,password);
 			if(con!= null) {
-				System.out.println("* * * * * * * * * * * * * * * * * * * * * *");
-				System.out.println("Connection Established");
-				System.out.println("* * * * * * * * * * * * * * * * * * * * * *");
+				//System.out.println("* * * * * * * * * * * * * * * * * * * * * *");
+				System.out.println("* * * Connection Established");
+				//System.out.println("* * * * * * * * * * * * * * * * * * * * * *");
 			}
 			
 		}catch(SQLException e){System.out.println(e);}
