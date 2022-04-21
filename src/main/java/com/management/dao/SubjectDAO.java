@@ -62,12 +62,14 @@ public class SubjectDAO {
 				id = 1;
 				subject_name = rs.getString(2);
 				teacher_name = rs.getString(3);
+			}else {
+				id = 0;
+				subject_name = "FREE PERIOD";
+				teacher_name = "EMPTY";
 			}
 		}catch(Exception e){System.out.println(e);}
 		Subject sub = null;
-		if(id == 1) {
-			sub = new Subject(subject_id,subject_name,teacher_name);
-		}
+		sub = new Subject(subject_id,subject_name,teacher_name);
 		return sub;
 	}
 }

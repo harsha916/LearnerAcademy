@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*,com.management.dao.*" %>
+<%int batchID = Integer.parseInt(request.getParameter("batch_id"));%>
 <%ResultSet[] rs = new ResultSet[8];%>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
 <style>
 p    {color: red;}
 </style>
-<title>Add Class</title>
+<title>Edit Class</title>
 </head>
 <body>
 <%
@@ -21,8 +22,8 @@ p    {color: red;}
     */
 %>
 
-<h1 align = 'center'>** ADD CLASS **</h1>
-<% String path = "" + request.getContextPath() + "/AddClassServlet"; %>
+<h1 align = 'center'>** EDIT CLASS **</h1>
+<% String path = "" + request.getContextPath() + "/EditBatchServlet?batch_id="+batchID; %>
 <form action="<%= path%>" method="post" align="center">
 
 Subject 1 : 

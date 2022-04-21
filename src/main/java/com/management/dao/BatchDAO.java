@@ -29,6 +29,24 @@ public class BatchDAO {
 		return batchID;
 	}
 	
+	public static int[] extractBatchSubjectsByID(int batchID) throws ClassNotFoundException, SQLException{
+		String extract_batch_details = "SELECT * FROM batch1 WHERE batch_id = " + batchID;
+		
+		Connection connection = DBConnection.createConnection();
+		PreparedStatement ps=connection.prepareStatement(extract_batch_details);
+		ResultSet rs=ps.executeQuery();
+		int subID[] = new int[8];
+		int i = 0;
+	    
+		if(rs.next()){
+			for(int j=2;j<=9;j++) {
+				subID[i] = rs.getInt(j);
+				i++;
+			}
+		}
+		return subID;
+	}
+	
 	public int extractBatchDetails() throws ClassNotFoundException, SQLException{
 		String extract_batch_details = "SELECT * FROM batch1";
 		
@@ -83,7 +101,7 @@ public class BatchDAO {
 		return result;
 	}
 	
-	public int deleteBatch(int batchID) throws ClassNotFoundException, SQLException
+	public static int deleteBatch(int batchID) throws ClassNotFoundException, SQLException
 	{
 		String insert_batch = "DELETE FROM batch1 WHERE batch_id = " + batchID;
 				
@@ -95,6 +113,26 @@ public class BatchDAO {
 		//executing query
 		result = ps.executeUpdate();
 		connection.close();
+		return result;
+	}
+	
+	public static int updateBatch(int batchID, int[] subID) throws ClassNotFoundException, SQLException{
+		System.out.println("* * * *update batch method started");
+		String query = "UPDATE batch1 SET subject_id1 = "+subID[0]+", subject_id2 = "+subID[1]+", " 
+				+ "subject_id3 = "+subID[2]+",subject_id4 = "+subID[3]+",subject_id5 ="+subID[4]+",  "
+				+ "subject_id6 = "+subID[5]+", subject_id7 = "+subID[6]+", "
+				+ "subject_id8 = "+subID[7]
+				+ " WHERE batch_id=" + batchID ;
+		
+		int result = 0;
+		Connection connection = DBConnection.createConnection();
+		PreparedStatement ps = connection.prepareStatement(query);
+	
+		System.out.println("preparedStatement");
+		//executing query
+		result = ps.executeUpdate();
+		connection.close();
+		System.out.println("* * * *update batch method ended");
 		return result;
 	}
 }

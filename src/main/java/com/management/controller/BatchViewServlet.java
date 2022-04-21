@@ -59,8 +59,9 @@ public class BatchViewServlet extends HttpServlet {
 			PreparedStatement ps=connection.prepareStatement(extract_batch_details);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
+				int curr_batchID = rs.getInt(1);
 				out.println("<td> </td>");
-				out.println("<td>" + rs.getInt(1) + "</td>");
+				out.println("<td>" + curr_batchID + "</td>");
 				for(int i=2;i<=9;i++) {
 					int curr_subID = rs.getInt(i);
 					String query = "SELECT * FROM subject WHERE subject_id = " + curr_subID;
@@ -77,19 +78,17 @@ public class BatchViewServlet extends HttpServlet {
 					else
 					    out.println("<td>" + subName + "</td>");
 				}
+				out.println("<td>");
+				out.println("<a href='" + request.getContextPath() + "/DeleteBatchServlet?batch_id="+ curr_batchID +"'>DELETE</a>");
+				out.println("</td>");
 				
-				out.println("<td><form action= '" + request.getContextPath() + "/DeleteBatchServlet'>");
-				out.println("<input type='hidden' value=''");
-				out.println("<input type='submit' value='DELETE BATCH'");
-				out.println("</form></td>");
+				out.println("<td>");
+				out.println("<a href='" + request.getContextPath() + "/ViewBatchServlet?batch_id="+ curr_batchID +"'>VIEW</a>");
+				out.println("</td>");
 				
-				out.println("<td><form action= '" + request.getContextPath() + "/ViewBatchServlet'>");
-				out.println("<input type='submit' value='VIEW BATCH'");
-				out.println("</form></td>");
-				
-				out.println("<td><form action= '" + request.getContextPath() + "/EditBatchServlet'>");
-				out.println("<input type='submit' value='EDIT BATCH'");
-				out.println("</form></td>");
+				out.println("<td>");
+				out.println("<a href='" + request.getContextPath() + "/editClass.jsp?batch_id="+ curr_batchID +"'>EDIT</a>");
+				out.println("</td>");
 				
 				out.println("</tr>");
 			}
@@ -102,10 +101,8 @@ public class BatchViewServlet extends HttpServlet {
 		}
 		
 		out.println("</table>");
-		out.println("<br>");
-		out.println("<form action= '/addClass.jsp' align='center'>");
-		out.println("<input type='submit' value='ADD BATCH'");
-		out.println("</form>");
+		out.println("<br><br>");
+		out.println("<a href='" + request.getContextPath() + "/addClass.jsp' align='center'>ADD BATCH</a>");
 		out.println("</body>");
 	}
 
