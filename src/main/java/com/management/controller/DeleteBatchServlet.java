@@ -34,7 +34,7 @@ public class DeleteBatchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		out.println("<h1>Delete Batch Servlet</h1>");
-		int batchID = Integer.parseInt(request.getParameter("curr_batchID"));
+		int batchID = Integer.parseInt(request.getParameter("batch_id"));
 		int result = 0;
 		try {
 			result = BatchDAO.deleteBatch(batchID);

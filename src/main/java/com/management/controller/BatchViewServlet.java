@@ -37,8 +37,8 @@ public class BatchViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		
-		out.println("<h1 align = 'center'>** SCHOOL CLASSES **</h1>");
 		out.println("<body>");
+		out.println("<h1 align = 'center'>** CLASSES **</h1>");
 		out.println("<table border = '4' width = '25%' align  = 'center'>");
 		out.println("<th>");
 		out.println("<td>Class ID</td>");
