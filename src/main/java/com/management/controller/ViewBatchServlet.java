@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.management.dao.BatchDAO;
 import com.management.dao.DBConnection;
@@ -56,7 +57,13 @@ public class ViewBatchServlet extends HttpServlet {
 		
 		out.println("<h1 align = 'center'>** SCHOOL CLASSES **</h1>");
 		out.println("<body>");
-		
+		//out.println("<br><br><br>");
+		out.println("<table border = '4' width = '20%' align  = 'right'>");
+		HttpSession session = request.getSession(); 
+		out.println("<th><td>Welcome! "+ session.getAttribute("first_name") + " " +session.getAttribute("last_name")+"</td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/LogoutServlet'>LOGOUT</a></td></th>");
+		out.println("</table>");
+		out.println("<br><br><br>");
 		out.println("<table border = '4' width = '25%' align  = 'center'>");
 		out.println("<th>");
 		out.println("<td>Class ID : " + batchID + "</td>");

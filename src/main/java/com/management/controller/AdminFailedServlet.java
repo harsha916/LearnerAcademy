@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AdminFailedServlet
@@ -31,9 +32,17 @@ public class AdminFailedServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		out.println("<h1>Admin failed to add in database</h1>");
-		out.println("<form action= " + request.getContextPath() + "/HomeServlet>");
-		out.println("<input type='submit' value='Go Back To Home Page'>");
-		out.println("</form>");
+		//out.println("<br><br><br>");
+		out.println("<table border = '4' width = '20%' align  = 'right'>");
+		HttpSession session = request.getSession(); 
+		out.println("<th><td>Welcome! "+ session.getAttribute("first_name") + " " +session.getAttribute("last_name")+"</td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/LogoutServlet'>LOGOUT</a></td></th>");
+		out.println("</table>");
+		out.println("<br><br><br>");
+		out.println("<table border = '4' width = '20%' align  = 'center'>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/HomeServlet'>HOME PAGE</a></td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/'>BACK</a></td></th>");
+		out.println("</table>");
 	}
 
 }

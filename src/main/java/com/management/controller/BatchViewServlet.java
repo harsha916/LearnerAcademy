@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.management.dao.*;
 
@@ -39,6 +40,13 @@ public class BatchViewServlet extends HttpServlet {
 		
 		out.println("<body>");
 		out.println("<h1 align = 'center'>** CLASSES **</h1>");
+		//out.println("<br><br><br>");
+		out.println("<table border = '4' width = '20%' align  = 'right'>");
+		HttpSession session = request.getSession(); 
+		out.println("<th><td>Welcome! "+ session.getAttribute("first_name") + " " +session.getAttribute("last_name")+"</td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/LogoutServlet'>LOGOUT</a></td></th>");
+		out.println("</table>");
+		out.println("<br><br><br>");
 		out.println("<table border = '4' width = '25%' align  = 'center'>");
 		out.println("<th>");
 		out.println("<td>Class ID</td>");
@@ -48,6 +56,7 @@ public class BatchViewServlet extends HttpServlet {
 		out.println("<td>Delete</td>");
 		out.println("<td>View</td>");
 		out.println("<td>Edit</td>");
+		out.println("<td>View Students</td>");
 		out.println("</th>");
 		
 		out.println("<tr>");
@@ -90,6 +99,9 @@ public class BatchViewServlet extends HttpServlet {
 				out.println("<a href='" + request.getContextPath() + "/editClass.jsp?batch_id="+ curr_batchID +"'>EDIT</a>");
 				out.println("</td>");
 				
+				out.println("<td>");
+				out.println("<a href='" + request.getContextPath() + "/BatchStudentsServlet?batch_id="+ curr_batchID +"'>STUDENTS</a>");
+				out.println("</td>");
 				out.println("</tr>");
 			}
 		} catch (ClassNotFoundException e) {
@@ -101,8 +113,13 @@ public class BatchViewServlet extends HttpServlet {
 		}
 		
 		out.println("</table>");
-		out.println("<br><br>");
-		out.println("<a href='" + request.getContextPath() + "/addClass.jsp' align='center'>ADD BATCH</a>");
+		out.println("<br><br><br>");
+		out.println("<table border = '4' width = '20%' align  = 'center'>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/addClass.jsp'>ADD CLASS</a></td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/HomeServlet'>HOME PAGE</a></td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/'>BACK</a></td></th>");
+		out.println("</table>");
+		out.println("<br><br><br>");
 		out.println("</body>");
 	}
 

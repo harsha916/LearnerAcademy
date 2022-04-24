@@ -11,27 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AdminAddedServlet
+ * Servlet implementation class StudentAdditionFailedServlet
  */
-@WebServlet("/AdminAddedServlet")
-public class AdminAddedServlet extends HttpServlet {
+@WebServlet("/StudentAdditionFailedServlet")
+public class StudentAdditionFailedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminAddedServlet() {
+    public StudentAdditionFailedServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		out.println("<h1>Admin added in database</h1>");
+		out.println("<h1>Failed to Add Student in Database</h1>");
 		//out.println("<br><br><br>");
 		out.println("<table border = '4' width = '20%' align  = 'right'>");
 		HttpSession session = request.getSession(); 
@@ -41,9 +41,8 @@ public class AdminAddedServlet extends HttpServlet {
 		out.println("<br><br><br>");
 		out.println("<table border = '4' width = '20%' align  = 'center'>");
 		out.println("<th><td><a href='"+request.getContextPath()+"/HomeServlet'>HOME PAGE</a></td></th>");
-		out.println("<th><td><a href='"+request.getContextPath()+"/'>BACK</a></td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/StudentViewServlet'>VIEW STUDENTS</a></td></th>");
 		out.println("</table>");
-		out.println("</form>");
 	}
 
 }

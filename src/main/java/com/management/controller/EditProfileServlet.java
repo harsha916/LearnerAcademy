@@ -1,6 +1,7 @@
 package com.management.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -11,17 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.management.dao.AdminDAO;
 import com.management.model.Admin;
+
 /**
- * Servlet implementation class AdminServlet
+ * Servlet implementation class EditProfileServlet
  */
-@WebServlet("/AdminServlet")
-public class AdminServlet extends HttpServlet {
+@WebServlet("/EditProfileServlet")
+public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminServlet() {
+    public EditProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +33,7 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int adminID = Integer.parseInt(request.getParameter("admin_id"));
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String userName = request.getParameter("userName");
@@ -45,17 +48,9 @@ public class AdminServlet extends HttpServlet {
 		emp.setEmail(email);
 		
 		
-		int result = 0;
-		try {
-			result = AdminDAO.registerAdmin(emp);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(result == 1) {
+		boolean result = false;
+		result = AdminDAO.updateAdmin(adminID,emp);
+		if(result) {
 			response.sendRedirect(request.getContextPath()+"/AdminAddedServlet");
 		}else {
 			response.sendRedirect(request.getContextPath()+"/AdminFailedServlet");

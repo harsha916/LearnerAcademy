@@ -45,8 +45,10 @@ public class LoginServlet extends HttpServlet {
 		Admin admin = AdminDAO.getAdmin(admin_id);
 		
 		
-		if(username.equals("admin") && password.equals("admin")) {
-			HttpSession session=request.getSession();  
+		if(username.equals(admin.getUserName()) && password.equals(admin.getPassword())) {
+			HttpSession session=request.getSession();
+			session.setAttribute("admin_id",admin.getAdmin_id());
+			session.setAttribute("user_name",admin.getUserName());
             session.setAttribute("first_name",admin.getFirstName());
             session.setAttribute("last_name",admin.getLastName());
             request.getRequestDispatcher("/HomeServlet").include(request, response);

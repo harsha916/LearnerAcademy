@@ -24,6 +24,55 @@ public class AdminDAO {
 		return id;
 	}
 	
+	public static boolean checkAdminPassword(int adminID,String password) {
+		int id=adminID;
+		try{
+			Connection connection = DBConnection.createConnection();
+			String query = "Select password FROM admin WHERE admin_id='"+id+"'";
+			PreparedStatement ps=connection.prepareStatement(query);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				String curr_password=rs.getString("password");
+				if(curr_password.equals(password)) {
+					return true;
+				}
+			}
+		}catch(Exception e){System.out.println(e);}
+		return false;
+	}
+	
+	public static boolean updateAdminPassword(int adminID,String password) {
+		int id=adminID;
+		try{
+			Connection connection = DBConnection.createConnection();
+			String query = "UPDATE admin SET password = '"+password+"' WHERE admin_id="+id;
+			PreparedStatement ps=connection.prepareStatement(query);
+			int result = ps.executeUpdate();
+			if(result == 1){
+				return true;
+			}
+		}catch(Exception e){System.out.println(e);}
+		return false;
+	}
+	
+	public static boolean updateAdmin(int adminID,Admin admin) {
+		int id=adminID;
+		try{
+			Connection connection = DBConnection.createConnection();
+			String query = "UPDATE admin SET first_name=?, last_name=?, user_name=?, email=? WHERE admin_id="+id;
+			PreparedStatement ps=connection.prepareStatement(query);
+			ps.setString(1, admin.getFirstName());
+			ps.setString(2, admin.getLastName());
+			ps.setString(3, admin.getUserName());
+			ps.setString(4, admin.getEmail());
+			int result = ps.executeUpdate();
+			if(result == 1){
+				return true;
+			}
+		}catch(Exception e){System.out.println(e);}
+		return false;
+	}
+	
 	public static int getAdminId(String username) {
 		int id=0;
 		try{

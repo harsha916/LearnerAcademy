@@ -35,10 +35,12 @@ public class HomeServlet extends HttpServlet {
 		
 		out.println("<body>");
 		out.println("<h1 align = 'center'>** Learner's Academy **</h1>");
-		
-		out.println("<table border = '4' width = '25%' align  = 'right'>");
+		out.println("<br><br><br>");
+		out.println("<table border = '4' width = '30%' align  = 'center'>");
 		HttpSession session = request.getSession(); 
 		out.println("<th><td>Welcome! "+ session.getAttribute("first_name") + " " +session.getAttribute("last_name")+"</td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/addAdmin.jsp'>ADD ADMIN</a></td></th>");
+		out.println("<th><td><a href='"+request.getContextPath()+"/AdminProfileServlet'>PROFILE</a></td></th>");
 		out.println("<th><td><a href='"+request.getContextPath()+"/LogoutServlet'>LOGOUT</a></td></th>");
 		out.println("</table>");
 		out.println("<br><br><br>");
